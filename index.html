@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Nexty Pulsa — Convert Pulsa ke eWallet & Bank</title>
+<meta name="description" content="Nexty Pulsa - layanan canggih untuk tukar pulsa ke eWallet atau bank secara cepat, aman, dan mudah." />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg1:#040b1d; --bg2:#071a35;
+  --accent1:#7c3aed; --accent2:#06b6d4;
+  --glass:rgba(255,255,255,0.06);
+  --muted:rgba(255,255,255,0.85);
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:'Poppins',system-ui,Segoe UI,Roboto,Arial}
+body{
+  background: radial-gradient(circle at top left, var(--bg1), var(--bg2));
+  color: #fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:32px;
+  overflow-x:hidden;
+}
+
+/* CARD */
+.card{
+  width:100%;
+  max-width:1100px;
+  border-radius:22px;
+  padding:30px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  position:relative;
+  overflow:hidden;
+  backdrop-filter: blur(18px);
+}
+
+/* Animated background blobs */
+@keyframes floaty {
+  0%,100%{transform:translateY(0) rotate(0deg);}
+  50%{transform:translateY(-25px) rotate(20deg);}
+}
+.blob{
+  position:absolute;border-radius:50%;filter:blur(40px);opacity:0.3;animation:floaty 8s ease-in-out infinite;
+}
+.blob.a{width:320px;height:320px;background:linear-gradient(135deg,var(--accent1),var(--accent2));left:-100px;top:-80px}
+.blob.b{width:240px;height:240px;background:linear-gradient(135deg,#22d3ee,#4f46e5);right:-80px;bottom:-60px;animation-delay:2s}
+
+/* HEADER */
+header{display:flex;align-items:center;gap:14px;position:relative;z-index:2}
+.logo{
+  width:60px;height:60px;
+  border-radius:16px;
+  background:linear-gradient(135deg,var(--accent1),var(--accent2));
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:26px;
+  box-shadow:0 8px 22px rgba(124,58,237,0.4);
+  color:white;
+  text-shadow:0 2px 10px rgba(0,0,0,0.4);
+}
+.brand{font-size:22px;font-weight:700}
+.tag{font-size:13px;color:rgba(255,255,255,0.85)}
+header .pill{margin-left:auto;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,0.08);font-size:13px;font-weight:600}
+
+/* LAYOUT */
+.layout{display:grid;grid-template-columns:1fr 400px;gap:30px;margin-top:22px}
+@media(max-width:900px){.layout{grid-template-columns:1fr}}
+
+/* FORM */
+.form{
+  background: rgba(255,255,255,0.03);
+  padding:22px;border-radius:16px;
+  border:1px solid rgba(255,255,255,0.06);
+  animation: fadeInUp 1s ease both;
+}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+h2{margin:0 0 8px 0}
+label{display:block;font-weight:600;margin-top:12px;font-size:14px}
+input,select,textarea{
+  width:100%;padding:10px 12px;margin-top:6px;
+  border:none;border-radius:10px;
+  background:rgba(255,255,255,0.06);
+  color:var(--muted);font-size:15px;outline:none;
+  transition:background .2s ease;
+}
+input:focus,select:focus,textarea:focus{background:rgba(255,255,255,0.1)}
+textarea{min-height:90px;resize:vertical}
+.row{display:flex;gap:10px}
+.row .col{flex:1}
+.small{font-size:13px;color:rgba(255,255,255,0.7);margin-top:8px}
+
+/* BUTTONS */
+.actions{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+a.btn{
+  display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:12px;
+  font-weight:700;text-decoration:none;color:white;
+  transition:transform .18s ease, box-shadow .18s;
+  position:relative;overflow:hidden;
+}
+a.btn:hover{transform:translateY(-4px)}
+a.wa{background:linear-gradient(135deg,#10b981,#059669);box-shadow:0 8px 22px rgba(16,185,129,0.25)}
+a.mail{background:linear-gradient(135deg,var(--accent1),var(--accent2));box-shadow:0 8px 22px rgba(99,102,241,0.25)}
+
+/* INFO */
+.info{
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  padding:20px;border-radius:16px;border:1px solid rgba(255,255,255,0.05);
+}
+.info h3{margin:0 0 10px 0}
+.list .item{padding:10px;background:rgba(255,255,255,0.03);border-radius:10px;margin-bottom:8px;font-size:14px}
+
+/* FOOTER */
+footer{display:flex;justify-content:space-between;align-items:center;margin-top:18px;color:rgba(255,255,255,0.7);font-size:13px;flex-wrap:wrap}
+footer a{color:#9ce9d8;text-decoration:none}
+footer a:hover{text-decoration:underline}
+
+.hidden{display:none}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="blob a"></div>
+  <div class="blob b"></div>
+
+  <header>
+    <div class="logo">⚡</div>
+    <div>
+      <div class="brand">Nexty Pulsa</div>
+      <div class="tag">Convert Pulsa ke eWallet / Bank Cepat & Aman</div>
+    </div>
+    <div class="pill">💎 Layanan Premium</div>
+  </header>
+
+  <div class="layout">
+    <!-- FORM -->
+    <div class="form" aria-labelledby="formTitle">
+      <h2 id="formTitle">Form Convert Pulsa</h2>
+      <p class="small">Isi data di bawah untuk memulai proses. Setelah submit, kamu bisa langsung kirim via WhatsApp atau Email.</p>
+
+      <label>Operator Pulsa</label>
+      <select id="operator">
+        <option>Telkomsel</option><option>Indosat</option>
+        <option>XL / Axis</option><option>Tri (3)</option><option>Smartfren</option>
+      </select>
+
+      <label>Nominal Pulsa</label>
+      <select id="nominal">
+        <option>5.000</option><option>10.000</option><option>25.000</option>
+        <option>50.000</option><option>100.000</option><option>200.000</option>
+      </select>
+
+      <div class="row">
+        <div class="col">
+          <label>Nomor Pengirim Pulsa</label>
+          <input id="senderNumber" placeholder="contoh: 0812xxxx">
+        </div>
+        <div class="col">
+          <label>Catatan (opsional)</label>
+          <input id="note" placeholder="Contoh: Transfer ke Dana">
+        </div>
+      </div>
+
+      <label>Tujuan</label>
+      <select id="destination">
+        <option>Dana</option><option>OVO</option><option>GoPay</option><option>ShopeePay</option><option>Bank</option>
+      </select>
+
+      <div id="walletDetails" class="hidden">
+        <label>Nomor eWallet / Nama Penerima</label>
+        <input id="destNumber" placeholder="contoh: 0812xxxx">
+      </div>
+
+      <div id="bankDetails" class="hidden">
+        <label>Detail Bank (Bank - No. Rekening - a.n.)</label>
+        <input id="bankInfo" placeholder="Contoh: BCA - 1234567890 - a.n. Nama">
+      </div>
+
+      <label>Instruksi Tambahan (opsional)</label>
+      <textarea id="extra" placeholder="Contoh: Mohon proses cepat."></textarea>
+
+      <div class="actions">
+        <a id="waBtn" class="btn wa" target="_blank">💬 Kirim via WhatsApp</a>
+        <a id="mailBtn" class="btn mail" target="_blank">📧 Kirim via Email</a>
+      </div>
+
+      <p class="small">Kontak Admin: <strong>WA 0812-2636-9423</strong> • <strong>Email educationclips8@gmail.com</strong></p>
+    </div>
+
+    <!-- INFO -->
+    <aside class="info">
+      <h3>Cara Kerja</h3>
+      <div class="list">
+        <div class="item"><strong>1.</strong> Pilih operator & nominal pulsa.</div>
+        <div class="item"><strong>2.</strong> Masukkan nomor pengirim dan tujuan.</div>
+        <div class="item"><strong>3.</strong> Klik tombol WhatsApp untuk kirim permintaan.</div>
+        <div class="item"><strong>4.</strong> Admin konfirmasi harga & instruksi transfer.</div>
+      </div>
+      <h4 style="margin-top:16px;">Keunggulan</h4>
+      <div style="font-size:14px;opacity:0.9">
+        ⚡ Proses <b>instan</b> setelah verifikasi<br>
+        🔒 Aman & transparan<br>
+        💬 Support aktif via WhatsApp
+      </div>
+    </aside>
+  </div>
+
+  <footer>
+    <div>© 2025 Nexty Pulsa — All Rights Reserved</div>
+    <div>Hubungi: <a href="https://wa.me/6281226369423">WhatsApp</a> • <a href="mailto:educationclips8@gmail.com">Email</a></div>
+  </footer>
+</div>
+
+<script>
+const waNumber = '6281226369423';
+const adminEmail = 'educationclips8@gmail.com';
+
+const operator = document.getElementById('operator');
+const nominal = document.getElementById('nominal');
+const senderNumber = document.getElementById('senderNumber');
+const note = document.getElementById('note');
+const destination = document.getElementById('destination');
+const walletDetails = document.getElementById('walletDetails');
+const destNumber = document.getElementById('destNumber');
+const bankDetails = document.getElementById('bankDetails');
+const bankInfo = document.getElementById('bankInfo');
+const extra = document.getElementById('extra');
+const waBtn = document.getElementById('waBtn');
+const mailBtn = document.getElementById('mailBtn');
+
+function toggleDestinationFields(){
+  const dest = destination.value;
+  if(dest === 'Bank'){
+    walletDetails.classList.remove('hidden');
+    bankDetails.classList.remove('hidden');
+    destNumber.placeholder = 'Nama penerima / opsional';
+  } else {
+    walletDetails.classList.remove('hidden');
+    bankDetails.classList.add('hidden');
+    destNumber.placeholder = 'Nomor eWallet tujuan';
+  }
+}
+destination.addEventListener('change', toggleDestinationFields);
+toggleDestinationFields();
+
+function buildMessage(){
+  const data = {
+    operator: operator.value,
+    nominal: nominal.value,
+    sender: senderNumber.value || '-',
+    destination: destination.value,
+    destNumber: destNumber.value || '-',
+    bankInfo: bankInfo.value || '-',
+    note: note.value || '-',
+    extra: extra.value || '-'
+  };
+  return [
+    `⚡ *Permintaan Convert Pulsa - Nexty Pulsa*`,
+    ``,
+    `Operator: ${data.operator}`,
+    `Nominal: Rp${data.nominal}`,
+    `Nomor Pengirim: ${data.sender}`,
+    `Tujuan: ${data.destination}`,
+    `Detail Tujuan: ${ data.destination === 'Bank' ? data.bankInfo : data.destNumber }`,
+    `Catatan: ${data.note}`,
+    `Instruksi: ${data.extra}`,
+    ``,
+    `Mohon konfirmasi harga & langkah berikutnya. Terima kasih.`
+  ].join('\n');
+}
+
+function encodeForWA(s){return encodeURIComponent(s);}
+function encodeForMail(s){return encodeURIComponent(s).replace(/%0A/g, '%0D%0A');}
+
+function updateLinks(){
+  const msg = buildMessage();
+  waBtn.href = `https://wa.me/${waNumber}?text=${encodeForWA(msg)}`;
+  mailBtn.href = `mailto:${adminEmail}?subject=${encodeURIComponent('Permintaan Convert Pulsa')}&body=${encodeForMail(msg)}`;
+}
+
+document.querySelectorAll('input,select,textarea').forEach(el=>el.addEventListener('input', updateLinks));
+updateLinks();
+
+waBtn.addEventListener('click', e=>{
+  if(!senderNumber.value){
+    e.preventDefault();
+    alert('Mohon isi Nomor Pengirim Pulsa terlebih dahulu.');
+  }
+});
+</script>
+</body>
+</html>
